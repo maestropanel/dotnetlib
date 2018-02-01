@@ -101,7 +101,8 @@
 
         public List<DomainListItem> GetDomainList()
         {
-            return SendApi<List<DomainListItem>>("Domain/GetList", "GET", new NameValueCollection());
+            var result = SendApi<ApiResult<List<DomainListItem>>>("Domain/GetList", "GET", new NameValueCollection());
+            return result.Details;
         }
 
         private string GeneratePassword(int Length)
