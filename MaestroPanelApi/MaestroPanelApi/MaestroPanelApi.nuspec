@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>MaestroPanel.Api</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Oguzhan YILMAZ</authors>
+    <owners>MaestroPanel</owners>
+    <licenseUrl>https://github.com/maestropanel/dotnetlib/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/maestropanel/dotnetlib</projectUrl>
+    <iconUrl>https://www.maestropanel.com/Content/img/maestropanel-logo-shadow.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>MaestroPanel .NET Library</description>
+    <releaseNotes>Refactored structure</releaseNotes>
+    <copyright>Copyright 2018 MaestroPanel</copyright>
+    <tags>maestropanel api dotnet library client</tags>
+	<dependencies>
+		<dependency id="Newtonsoft.Json" version="9.0.0.0" />
+	</dependencies>
+  </metadata>
+</package>
