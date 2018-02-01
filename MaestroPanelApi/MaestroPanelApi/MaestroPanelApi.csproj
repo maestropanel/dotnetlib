@@ -45,9 +45,12 @@
     <Compile Include="ApiClient.cs" />
     <Compile Include="ApiResult.cs" />
     <Compile Include="Entity\DnsZoneRecord.cs" />
+    <Compile Include="Entity\DomainListItem.cs" />
     <Compile Include="Entity\DomainOperationsResult.cs" />
+    <Compile Include="Entity\DomainStatuses.cs" />
     <Compile Include="Entity\LogEntry.cs" />
     <Compile Include="Entity\ResellerOperationResult.cs" />
+    <Compile Include="Entity\UserTypes.cs" />
     <Compile Include="Entity\Whoami.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="LogHelper.cs" />

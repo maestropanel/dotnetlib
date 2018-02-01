@@ -99,6 +99,11 @@
             return ExecuteDomainOperation("Domain/Stop", "POST", _args);
         }
 
+        public List<DomainListItem> GetDomainList()
+        {
+            return SendApi<List<DomainListItem>>("Domain/GetList", "GET", new NameValueCollection());
+        }
+
         private string GeneratePassword(int Length)
         {
             return System.Web.Security.Membership.GeneratePassword(8, 2);
@@ -310,15 +315,6 @@
             return ExecuteDomainOperation("Domain/ChangeReseller", "POST", _args);
         }
         
-        public ApiResult<Whoami> Whoami()
-        {
-            var requestUrl = String.Empty;
-
-            var _args = new NameValueCollection();
-            return SendApi<ApiResult<Whoami>>("User/Whoami", "GET", _args, new[] { typeof(Whoami) }, out requestUrl);
-        }
-
-
         public ApiResult<DomainOperationsResult> SetDnsZone(string name, int soa_expired, int soa_ttl, int soa_refresh, string soa_email, int soa_retry, int soa_serial,
             string primaryServer, List<DnsZoneRecordItem> records)
         {
@@ -416,6 +412,10 @@
             return ExecuteDomainOperation("Domain/ChangeMailBoxPassword", "POST", _args);
         }
 
+        public ApiResult<Whoami> Whoami()
+        {
+            return SendApi<ApiResult<Whoami>>("User/Whoami", "GET", new NameValueCollection());
+        }
 
         #region Privates
         private void WriteData(ref HttpWebRequest _request, NameValueCollection _parameters)
@@ -559,6 +559,52 @@
             }
 
             return result;
+        }
+
+        private T SendApi<T>(string action, string method, NameValueCollection _parameters)
+        {
+            var _result = default(T);
+
+            var contentType = String.Empty;
+
+            if (method == "GET")
+            {
+                _parameters.Add("key", _apiKey);
+                _parameters.Add("format", _format);
+
+                if (_SuppressResponse)
+                    _parameters.Add("suppress_response_codes", "true");
+            }
+
+            var _uri =
+                method == "GET" ?
+                new Uri(String.Format("{0}/{1}?{2}", _apiUri, action, ToQueryString(_parameters))) :
+                new Uri(String.Format("{0}/{1}?key={2}&format={3}&suppress_response_codes={4}", _apiUri, action, _apiKey, _format, _SuppressResponse ? "true" : "false"));            
+
+            try
+            {
+                HttpWebRequest request = WebRequest.Create(_uri) as HttpWebRequest;
+                request.Method = method;
+                request.Timeout = 240 * 1000;
+                request.ContentType = "application/x-www-form-urlencoded";
+
+                if (method != "GET")
+                    WriteData(ref request, _parameters);
+
+                var _responseText = GetData(request, out contentType);
+
+                if (_format == "JSON")
+                    _result = JsonConvert.DeserializeObject<T>(_responseText, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Objects });
+                else
+                    _result = XmlHelper.DeSerializeObject<T>(_responseText);
+
+            }
+            catch (Exception ex)
+            {
+                _log.WriteLog(_uri.ToString(), method, _parameters, String.Format("{0}\r\n{1}", ex.Message, ex.StackTrace));
+            }
+
+            return _result;
         }
 
         private T SendApi<T>(string action, string method, NameValueCollection _parameters, Type[] extraTypes, out string RequestUri)
