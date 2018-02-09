@@ -102,6 +102,10 @@
         public List<DomainListItem> GetDomainList()
         {
             var result = SendApi<ApiResult<List<DomainListItem>>>("Domain/GetList", "GET", new NameValueCollection());
+
+            if (result.ErrorCode != DOMAIN_OPERATION_SUCCESS)
+                throw new Exception(result.Message);
+
             return result.Details;
         }
 

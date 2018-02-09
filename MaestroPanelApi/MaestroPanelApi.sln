@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaestroPanelApi", "MaestroPanelApi\MaestroPanelApi.csproj", "{A66FB589-C535-42D1-9201-1DC31F3DA904}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaestroPanelApi.Test", "MaestroPanelApi.Test\MaestroPanelApi.Test.csproj", "{8F3D48B8-9E78-45ED-935A-1573EB1FC594}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{A66FB589-C535-42D1-9201-1DC31F3DA904}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A66FB589-C535-42D1-9201-1DC31F3DA904}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A66FB589-C535-42D1-9201-1DC31F3DA904}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F3D48B8-9E78-45ED-935A-1573EB1FC594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F3D48B8-9E78-45ED-935A-1573EB1FC594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F3D48B8-9E78-45ED-935A-1573EB1FC594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F3D48B8-9E78-45ED-935A-1573EB1FC594}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
